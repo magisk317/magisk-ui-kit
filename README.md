@@ -41,11 +41,16 @@ Current extracted surface:
 
 ## Include from another repo
 
-In `settings.gradle.kts`:
+Recommended: add it as a git submodule in the parent repository root.
+
+```bash
+git submodule add https://github.com/magisk317/magisk-ui-kit.git magisk-ui-kit
+```
+
+Then in `settings.gradle.kts`:
 
 ```kotlin
 include(":magisk-ui-kit")
-project(":magisk-ui-kit").projectDir = file("../magisk-ui-kit")
 ```
 
 Then in the target module:
