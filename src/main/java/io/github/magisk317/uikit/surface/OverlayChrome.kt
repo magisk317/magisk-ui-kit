@@ -1,0 +1,114 @@
+package io.github.magisk317.uikit.surface
+
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ColumnScope
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.RowScope
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.onSizeChanged
+import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.dp
+import io.github.magisk317.uikit.theme.spacing
+
+@Composable
+fun OverlayHeaderScaffold(
+    modifier: Modifier = Modifier,
+    fallbackTopPadding: Dp,
+    bottomPadding: Dp = 0.dp,
+    overlayModifier: Modifier = Modifier,
+    overlay: @Composable ColumnScope.() -> Unit,
+    content: @Composable (PaddingValues) -> Unit,
+) {
+    val density = LocalDensity.current
+    var overlayHeightPx by remember { mutableIntStateOf(0) }
+    val topPadding = if (overlayHeightPx > 0) {
+        with(density) { overlayHeightPx.toDp() }
+    } else {
+        fallbackTopPadding
+    }
+
+    Box(
+        modifier = modifier.fillMaxSize(),
+    ) {
+        content(PaddingValues(top = topPadding, bottom = bottomPadding))
+
+        Column(
+            modifier = overlayModifier
+                .align(Alignment.TopCenter)
+                .fillMaxWidth()
+                .onSizeChanged { overlayHeightPx = it.height },
+            content = overlay,
+        )
+    }
+}
+
+@Composable
+fun OverlayHeaderPanel(
+    modifier: Modifier = Modifier,
+    title: String? = null,
+    subtitle: String? = null,
+    actions: @Composable RowScope.() -> Unit = {},
+    content: @Composable ColumnScope.() -> Unit,
+) {
+    Column(
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(
+                start = MaterialTheme.spacing.medium,
+                top = MaterialTheme.spacing.small,
+                end = MaterialTheme.spacing.medium,
+                bottom = MaterialTheme.spacing.small,
+            ),
+        verticalArrangement = Arrangement.spacedBy(MaterialTheme.spacing.small),
+    ) {
+        if (!title.isNullOrBlank() || !subtitle.isNullOrBlank()) {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.Top,
+            ) {
+                Column(
+                    modifier = Modifier.weight(1f),
+                    verticalArrangement = Arrangement.spacedBy(4.dp),
+                ) {
+                    if (!title.isNullOrBlank()) {
+                        Text(
+                            text = title,
+                            style = MaterialTheme.typography.headlineSmall,
+                            color = MaterialTheme.colorScheme.onSurface,
+                        )
+                    }
+                    if (!subtitle.isNullOrBlank()) {
+                        Text(
+                            text = subtitle,
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        )
+                    }
+                }
+                Row(
+                    horizontalArrangement = Arrangement.spacedBy(MaterialTheme.spacing.extraSmall),
+                    verticalAlignment = Alignment.CenterVertically,
+                    content = actions,
+                )
+            }
+        }
+
+        content()
+    }
+}
