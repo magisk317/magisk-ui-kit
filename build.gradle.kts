@@ -2,12 +2,14 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
     id("com.android.library")
+    id("com.android.compose.screenshot") version "0.0.1-alpha13"
     id("org.jetbrains.kotlin.plugin.compose")
 }
 
 android {
     namespace = "io.github.magisk317.uikit"
-    compileSdk = 36
+    compileSdk = 37
+    experimentalProperties["android.experimental.enableScreenshotTest"] = true
 
     defaultConfig {
         minSdk = 23
@@ -37,6 +39,12 @@ android {
             isMinifyEnabled = false
         }
     }
+
+    testOptions {
+        screenshotTests {
+            imageDifferenceThreshold = 0.0001f
+        }
+    }
 }
 
 dependencies {
@@ -48,4 +56,6 @@ dependencies {
     implementation("androidx.core:core-ktx:1.18.0")
 
     debugImplementation("androidx.compose.ui:ui-tooling")
+    screenshotTestImplementation("com.android.tools.screenshot:screenshot-validation-api:0.0.1-alpha13")
+    screenshotTestImplementation("androidx.compose.ui:ui-tooling")
 }
