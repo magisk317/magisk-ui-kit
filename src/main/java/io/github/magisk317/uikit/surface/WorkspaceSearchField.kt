@@ -22,6 +22,9 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import io.github.magisk317.uikit.R
+import io.github.magisk317.uikit.theme.LocalUiKitStyle
+import io.github.magisk317.uikit.theme.UiKitStyle
+import top.yukonga.miuix.kmp.basic.InputField as MiuixSearchInputField
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -31,6 +34,19 @@ fun WorkspaceSearchField(
     modifier: Modifier = Modifier,
     onValueChange: (String) -> Unit,
 ) {
+    if (LocalUiKitStyle.current == UiKitStyle.Miuix) {
+        MiuixSearchInputField(
+            query = query,
+            onQueryChange = onValueChange,
+            onSearch = {},
+            expanded = true,
+            onExpandedChange = {},
+            modifier = modifier.fillMaxWidth(),
+            label = placeholder,
+        )
+        return
+    }
+
     val focusManager = LocalFocusManager.current
 
     Surface(

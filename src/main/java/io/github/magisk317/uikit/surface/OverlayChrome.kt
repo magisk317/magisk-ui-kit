@@ -21,9 +21,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import io.github.magisk317.uikit.theme.LocalUiKitStyle
+import io.github.magisk317.uikit.theme.UiKitStyle
 import io.github.magisk317.uikit.theme.spacing
+import top.yukonga.miuix.kmp.theme.MiuixTheme
 
 @Composable
 fun OverlayHeaderScaffold(
@@ -65,6 +69,52 @@ fun OverlayHeaderPanel(
     actions: @Composable RowScope.() -> Unit = {},
     content: @Composable ColumnScope.() -> Unit,
 ) {
+    if (LocalUiKitStyle.current == UiKitStyle.Miuix) {
+        Column(
+            modifier = modifier
+                .fillMaxWidth()
+                .padding(horizontal = 18.dp, vertical = 12.dp),
+            verticalArrangement = Arrangement.spacedBy(10.dp),
+        ) {
+            if (!title.isNullOrBlank() || !subtitle.isNullOrBlank()) {
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.Top,
+                ) {
+                    Column(
+                        modifier = Modifier.weight(1f),
+                        verticalArrangement = Arrangement.spacedBy(4.dp),
+                    ) {
+                        if (!title.isNullOrBlank()) {
+                            Text(
+                                text = title,
+                                style = MiuixTheme.textStyles.title2,
+                                fontWeight = FontWeight.Bold,
+                                color = MiuixTheme.colorScheme.onSurface,
+                            )
+                        }
+                        if (!subtitle.isNullOrBlank()) {
+                            Text(
+                                text = subtitle,
+                                style = MiuixTheme.textStyles.body2,
+                                color = MiuixTheme.colorScheme.onSurfaceVariantSummary,
+                            )
+                        }
+                    }
+                    Row(
+                        horizontalArrangement = Arrangement.spacedBy(8.dp),
+                        verticalAlignment = Alignment.CenterVertically,
+                        content = actions,
+                    )
+                }
+            }
+
+            content()
+        }
+        return
+    }
+
     Column(
         modifier = modifier
             .fillMaxWidth()
