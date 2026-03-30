@@ -9,11 +9,13 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.ListItem
+import androidx.compose.material3.ListItemDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import io.github.magisk317.uikit.R
 import io.github.magisk317.uikit.theme.spacing
@@ -29,7 +31,7 @@ fun SectionCard(
     Card(
         modifier = Modifier.fillMaxWidth(),
         colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surfaceContainer,
+            containerColor = MaterialTheme.colorScheme.surfaceContainerLow,
         ),
     ) {
         Column(modifier = Modifier.fillMaxWidth()) {
@@ -59,6 +61,7 @@ fun SectionCard(
                 modifier = Modifier
                     .fillMaxWidth()
                     .clickable(enabled = accordionMode, onClick = onExpandedChange),
+                colors = ListItemDefaults.colors(containerColor = Color.Transparent),
             )
 
             AnimatedVisibility(visible = if (accordionMode) sectionExpanded else true) {
@@ -99,6 +102,7 @@ fun Item(
         },
         trailingContent = trailingContent,
         modifier = modifier.clickable(enabled = enabled, onClick = onClick),
+        colors = ListItemDefaults.colors(containerColor = Color.Transparent),
     )
 }
 
@@ -152,6 +156,7 @@ fun StateSwitchItem(
         } else {
             modifier
         },
+        colors = ListItemDefaults.colors(containerColor = Color.Transparent),
     )
 }
 
@@ -191,5 +196,6 @@ fun ActionSwitchItem(
             )
         },
         modifier = modifier.clickable(enabled = enabled, onClick = onClick),
+        colors = ListItemDefaults.colors(containerColor = Color.Transparent),
     )
 }
