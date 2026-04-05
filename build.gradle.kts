@@ -55,6 +55,7 @@ dependencies {
     implementation("androidx.compose.material:material-icons-extended")
     implementation("androidx.compose.ui:ui-tooling-preview")
     implementation("androidx.core:core-ktx:1.18.0")
+    implementation("dev.chrisbanes.haze:haze-android:1.7.2")
     implementation("top.yukonga.miuix.kmp:miuix:0.8.8")
 
     debugImplementation("androidx.compose.ui:ui-tooling")

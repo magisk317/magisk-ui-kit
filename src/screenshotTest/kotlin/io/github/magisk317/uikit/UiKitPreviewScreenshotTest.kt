@@ -14,6 +14,8 @@ import androidx.compose.ui.unit.dp
 import com.android.tools.screenshot.PreviewTest
 import io.github.magisk317.uikit.preference.SectionCard
 import io.github.magisk317.uikit.preference.StateSwitchItem
+import io.github.magisk317.uikit.foundation.AppLinearLoadingIndicator
+import io.github.magisk317.uikit.foundation.PolygonMorphLoadingIndicator
 import io.github.magisk317.uikit.surface.AppBottomNavigationBar
 import io.github.magisk317.uikit.surface.AppNavigationItemSpec
 import io.github.magisk317.uikit.surface.ExpressiveHeroCard
@@ -141,6 +143,20 @@ fun SummaryCardMiuixLightPreview() {
                 label = "Framework",
                 value = "LSPosed",
             )
+        }
+    }
+}
+
+@PreviewTest
+@Preview(name = "LoadingPrimitivesLight", showBackground = true, backgroundColor = 0xFFF4F1EA, widthDp = 380)
+@Composable
+fun LoadingPrimitivesLightPreview() {
+    PreviewFrame {
+        Box(modifier = Modifier.fillMaxWidth()) {
+            AppLinearLoadingIndicator(modifier = Modifier.fillMaxWidth())
+        }
+        Box(modifier = Modifier.padding(top = 24.dp)) {
+            PolygonMorphLoadingIndicator()
         }
     }
 }

@@ -8,7 +8,23 @@ Current extracted surface:
   - `MagiskUiKitTheme`
   - `MagiskThemeMode`
   - `UpdateSystemBars`
+  - `SystemBarsScrim`
+  - `rememberHazeStyle`
   - `Spacing`
+- `io.github.magisk317.uikit.foundation`
+  - `BasePresenter`
+  - `BaseView`
+  - `TextWatcherAdapter`
+  - `BaseItemCallback`
+  - `ItemCallback`
+  - `ItemChildCallback`
+  - `ImmutableListWrapper`
+  - `LoadingIndicatorTokens`
+  - `rememberMinDurationLoading`
+  - `AppLinearLoadingIndicator`
+  - `PolygonMorphLoadingIndicator`
+  - `LocalSnackbarHostState`
+  - `SessionLoadingRegistry`
 - `io.github.magisk317.uikit.common`
   - `DismissibleSnackbarHost`
 - `io.github.magisk317.uikit.preference`
