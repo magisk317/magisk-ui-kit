@@ -25,6 +25,11 @@ Current extracted surface:
   - `PolygonMorphLoadingIndicator`
   - `LocalSnackbarHostState`
   - `SessionLoadingRegistry`
+- `io.github.magisk317.uikit.shell`
+  - `BaseActivity`
+  - `PlayUpdateDelegate`
+  - `AppInfoHelper`
+  - `RecordItem`
 - `io.github.magisk317.uikit.common`
   - `DismissibleSnackbarHost`
 - `io.github.magisk317.uikit.preference`

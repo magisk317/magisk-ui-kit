@@ -16,6 +16,8 @@ import io.github.magisk317.uikit.preference.SectionCard
 import io.github.magisk317.uikit.preference.StateSwitchItem
 import io.github.magisk317.uikit.foundation.AppLinearLoadingIndicator
 import io.github.magisk317.uikit.foundation.PolygonMorphLoadingIndicator
+import io.github.magisk317.uikit.shell.AppInfoSnapshot
+import io.github.magisk317.uikit.shell.RecordItem
 import io.github.magisk317.uikit.surface.AppBottomNavigationBar
 import io.github.magisk317.uikit.surface.AppNavigationItemSpec
 import io.github.magisk317.uikit.surface.ExpressiveHeroCard
@@ -25,6 +27,7 @@ import io.github.magisk317.uikit.surface.WorkspaceSearchField
 import io.github.magisk317.uikit.theme.MagiskThemeMode
 import io.github.magisk317.uikit.theme.MagiskUiKitTheme
 import io.github.magisk317.uikit.theme.UiKitStyle
+import androidx.compose.material3.Text
 
 @PreviewTest
 @Preview(name = "SectionCardLight", showBackground = true, backgroundColor = 0xFFF4F1EA, widthDp = 380)
@@ -152,12 +155,18 @@ fun SummaryCardMiuixLightPreview() {
 @Composable
 fun LoadingPrimitivesLightPreview() {
     PreviewFrame {
+        val snapshot = AppInfoSnapshot(packageName = "com.example.smscode", label = "Example")
+        val recordItem = RecordItem(snapshot).apply { isSelected = true }
         Box(modifier = Modifier.fillMaxWidth()) {
             AppLinearLoadingIndicator(modifier = Modifier.fillMaxWidth())
         }
         Box(modifier = Modifier.padding(top = 24.dp)) {
             PolygonMorphLoadingIndicator()
         }
+        Text(
+            text = "${recordItem.item.label} (${recordItem.isSelected})",
+            modifier = Modifier.padding(top = 72.dp),
+        )
     }
 }
 
