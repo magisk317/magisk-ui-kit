@@ -54,6 +54,8 @@ dependencies {
     implementation("androidx.compose.material3:material3:1.5.0-alpha15")
     implementation("androidx.compose.material:material-icons-extended")
     implementation("androidx.compose.ui:ui-tooling-preview")
+    implementation("androidx.activity:activity:1.13.0")
+    implementation("androidx.appcompat:appcompat:1.7.1")
     implementation("androidx.core:core-ktx:1.18.0")
     implementation("dev.chrisbanes.haze:haze-android:1.7.2")
     implementation("top.yukonga.miuix.kmp:miuix:0.8.8")
