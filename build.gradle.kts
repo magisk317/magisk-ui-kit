@@ -9,6 +9,7 @@ plugins {
 android {
     namespace = "io.github.magisk317.uikit"
     compileSdk = 37
+    compileSdkMinor = 0
     experimentalProperties["android.experimental.enableScreenshotTest"] = true
 
     defaultConfig {
